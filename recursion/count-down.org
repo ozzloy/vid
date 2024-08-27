@@ -1,6 +1,6 @@
 * countdown definition
   + =number= is never assigned to in the body of the function
-#+begin_src js :results output
+#+begin_src js :results output :exports both
   function countdown(number) {
     if(number === 0) return console.log('happy new year!');
     console.log(number);
