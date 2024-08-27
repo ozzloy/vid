@@ -23,7 +23,6 @@
 
 #+RESULTS:
 
-#+name: countdown-2
 #+begin_quote
 #+end_quote
 ** stack with frame added for countdown(2)
@@ -152,7 +151,7 @@
     console.log('happy new year!');
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-0>>
   countdown_0();
 #+end_src
@@ -168,7 +167,7 @@
     console.log('happy new year!');
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-1>>
   countdown_1();
 #+end_src
@@ -186,7 +185,7 @@
     console.log('happy new year!');
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-2>>
   countdown_2();
 #+end_src
@@ -206,7 +205,7 @@
     console.log('happy new year!');
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-3>>
   countdown_3();
 #+end_src
@@ -228,7 +227,7 @@
     console.log('happy new year!');
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-4>>
   countdown_4();
 #+end_src
@@ -250,7 +249,7 @@
     countdown_3();
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-4-3>>
   countdown_4();
 #+end_src
@@ -271,7 +270,7 @@
     countdown_2();
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-3-2>>
   countdown_3();
 #+end_src
@@ -291,7 +290,7 @@
     countdown_1();
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-2-1>>
   countdown_2();
 #+end_src
@@ -310,7 +309,7 @@
     countdown_0();
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-1-0>>
   countdown_1();
 #+end_src
@@ -326,7 +325,7 @@
     console.log('happy new year!');
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-0-again>>
   countdown_0();
 #+end_src
@@ -343,7 +342,7 @@
     countdown(number - 1);
   }
 #+end_src
-#+begin_src js :noweb yes :results output
+#+begin_src js :noweb yes :results output :exports both
   <<countdown-n>>
   countdown(5);
 #+end_src
