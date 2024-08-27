@@ -1,0 +1,363 @@
+
+
+
+
+
+
+
+* countdown definition
+  + =number= is never assigned to in the body of the function
+#+begin_src js :results output
+  function countdown(number) {
+    if(number === 0) return console.log('happy new year!');
+    console.log(number);
+    return countdown(number - 1);
+  }
+
+  countdown(2);
+#+end_src
+
+#+RESULTS:
+: 2
+: 1
+: happy new year!
+
+* tracking execution
+** initial countdown function call with argument 2
+#+begin_src js
+/**/countdown(2)/**/;
+#+end_src
+
+#+RESULTS:
+
+#+begin_quote console
+#+end_quote
+** stack with frame added for countdown(2)
+#+begin_src js :eval never
+  function countdown(2) {
+    if (2 === 0) return console.log('happy new year!');
+    console.log(2);
+    return /**/countdown(2 - 1)/**/;
+  }
+  //-----------------------------------------------------------------
+  /**/countdown(2);/**/
+#+end_src
+#+begin_quote console
+  2
+#+end_quote
+** stack with frame added for countdown(1)
+#+begin_src js :eval never
+  function countdown(1) {
+    if (1 === 0) return console.log('happy new year!');
+    console.log(1);
+    return /**/countdown(1 - 1)/**/;
+  }
+  //-----------------------------------------------------------------
+  function countdown(2) {
+    if (2 === 0) return console.log('happy new year!');
+    console.log(2);
+    return /**/countdown(2 - 1)/**/;
+  }
+  //-----------------------------------------------------------------
+  /**/countdown(2)/**/;
+#+end_src
+#+begin_quote console
+  2
+  1
+#+end_quote
+** stack with frame added for countdown(0)
+#+begin_src js :eval never
+  function countdown(0) {
+    if (0 === 0) return /**/console.log('happy new year!')/**/;
+    console.log(0);
+    return countdown(0 - 1);
+  }
+  //-----------------------------------------------------------------
+  function countdown(1) {
+    if (1 === 0) return console.log('happy new year!');
+    console.log(1);
+    return /**/countdown(1 - 1)/**/;
+  }
+  //-----------------------------------------------------------------
+  function countdown(2) {
+    if (2 === 0) return console.log('happy new year!');
+    console.log(2);
+    return /**/countdown(2 - 1)/**/;
+  }
+  //-----------------------------------------------------------------
+  /**/countdown(2)/**/;
+#+end_src
+#+begin_quote console
+  2
+  1
+  happy new year!
+#+end_quote
+** stack with countdown(0)'s console.log('happy new year!') eval'ed
+#+begin_src js :eval never
+  function countdown(0) {
+    if (0 === 0) return /**/undefined/**/; // printed 'happy new year!'
+    console.log(0);
+    return countdown(0 - 1);
+  }
+  //-------------------------------------------------------------------
+  function countdown(1) {
+    if (1 === 0) return console.log('happy new year!');
+    console.log(1);
+    return /**/countdown(1 - 1)/**/;
+  }
+  //-------------------------------------------------------------------
+  function countdown(2) {
+    if (2 === 0) return console.log('happy new year!');
+    console.log(2);
+    return /**/countdown(2 - 1)/**/;
+  }
+  //-------------------------------------------------------------------
+  /**/countdown(2)/**/;
+#+end_src
+** stack with countdown(1)'s call to countdown(0) eval'ed
+#+begin_src js :eval never
+  function countdown(1) {
+    if (1 === 0) return console.log('happy new year!');
+    console.log(1);
+    return /**/undefined/**/;
+  }
+  //-------------------------------------------------------------------
+  function countdown(2) {
+    if (2 === 0) return console.log('happy new year!');
+    console.log(2);
+    return /**/countdown(2 - 1)/**/;
+  }
+  //-------------------------------------------------------------------
+  /**/countdown(2)/**/;
+#+end_src
+** stack with countdown(2)'s call to countdown(1) eval'ed
+#+begin_src js :eval never
+  function countdown(2) {
+    if (2 === 0) return console.log('happy new year!');
+    console.log(2);
+    return /**/undefined/**/;
+  }
+  //-------------------------------------------------------------------
+  /**/countdown(2)/**/;
+#+end_src
+** stack with first frame's call to countdown(2) eval'ed
+#+begin_src js :eval never
+  /**/undefined/**/;
+#+end_src
+
+* following the  step by step method for writing countdown recursively
+** write countdown_n for n = 0 through 4
+  + if the input is an array, do an array with 0 through 4 elements
+  + if the input is a string, do a string with 0 through 4 characters
+  + if the input is a number, do 0 through 4 probably
+    + maybe 1 through 5 if there's multiplying
+*** countdown_0
+#+name: countdown-0
+#+begin_src js :eval never :noweb yes
+  function countdown_0() {
+    console.log('happy new year!');
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-0>>
+  countdown_0();
+#+end_src
+
+#+RESULTS:
+: happy new year!
+
+*** countdown_1
+#+name: countdown-1
+#+begin_src js :eval never :noweb yes
+  function countdown_1() {
+    console.log(1);
+    console.log('happy new year!');
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-1>>
+  countdown_1();
+#+end_src
+
+#+RESULTS:
+: 1
+: happy new year!
+
+*** countdown_2
+#+name: countdown-2
+#+begin_src js :eval never :noweb yes
+  function countdown_2() {
+    console.log(2);
+    console.log(1);
+    console.log('happy new year!');
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-2>>
+  countdown_2();
+#+end_src
+
+#+RESULTS:
+: 2
+: 1
+: happy new year!
+
+*** countdown_3
+#+name: countdown-3
+#+begin_src js :eval never :noweb yes
+  function countdown_3() {
+    console.log(3);
+    console.log(2);
+    console.log(1);
+    console.log('happy new year!');
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-3>>
+  countdown_3();
+#+end_src
+
+#+RESULTS:
+: 3
+: 2
+: 1
+: happy new year!
+
+*** countdown_4
+#+name: countdown-4
+#+begin_src js :eval never :noweb yes
+  function countdown_4() {
+    console.log(4);
+    console.log(3);
+    console.log(2);
+    console.log(1);
+    console.log('happy new year!');
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-4>>
+  countdown_4();
+#+end_src
+
+#+RESULTS:
+: 4
+: 3
+: 2
+: 1
+: happy new year!
+
+** rewrite countdown_n with countdown_{n - 1}, starting with n = 4
+*** countdown_4 with countdown_3
+#+name: countdown-4-3
+#+begin_src js :eval never :noweb yes
+  <<countdown-3>>
+  function countdown_4() {
+    console.log(4);
+    countdown_3();
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-4-3>>
+  countdown_4();
+#+end_src
+
+#+RESULTS:
+: 4
+: 3
+: 2
+: 1
+: happy new year!
+
+*** countdown_3
+#+name: countdown-3-2
+#+begin_src js :eval never :noweb yes
+  <<countdown-2>>
+  function countdown_3() {
+    console.log(3);
+    countdown_2();
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-3-2>>
+  countdown_3();
+#+end_src
+
+#+RESULTS:
+: 3
+: 2
+: 1
+: happy new year!
+
+*** countdown_2
+#+name: countdown-2-1
+#+begin_src js :eval never :noweb yes
+  <<countdown-1>>
+  function countdown_2() {
+    console.log(2);
+    countdown_1();
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-2-1>>
+  countdown_2();
+#+end_src
+
+#+RESULTS:
+: 2
+: 1
+: happy new year!
+
+*** countdown_1
+#+name: countdown-1-0
+#+begin_src js :eval never :noweb yes
+  <<countdown-0>>
+  function countdown_1() {
+    console.log(1);
+    countdown_0();
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-1-0>>
+  countdown_1();
+#+end_src
+
+#+RESULTS:
+: 1
+: happy new year!
+
+*** countdown_0
+#+name: countdown-0-again
+#+begin_src js :eval never :noweb yes
+  function countdown_0() {
+    console.log('happy new year!');
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-0-again>>
+  countdown_0();
+#+end_src
+
+#+RESULTS:
+: happy new year!
+
+** write the recursive version of countdown
+#+name: countdown-n
+#+begin_src js :eval never :noweb yes
+  function countdown(number) {
+    if(number === 0) return console.log('happy new year!');
+    console.log(number);
+    countdown(number - 1);
+  }
+#+end_src
+#+begin_src js :noweb yes :results output
+  <<countdown-n>>
+  countdown(5);
+#+end_src
+
+#+RESULTS:
+: 5
+: 4
+: 3
+: 2
+: 1
+: happy new year!
